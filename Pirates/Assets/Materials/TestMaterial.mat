@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TestMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 3ca3e365875ec4e57a962228b28e55e8,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Floats:
+    - Vector1_210325C3: 0
+    - Vector1_263D3335: 0.95
+    - Vector1_5AEF9326: 0
+    - Vector1_69A2EF4D: 0.9
+    - Vector1_6B022895: 0
+    - Vector1_8025E8E1: 0.65
+    - Vector1_A6DF68C: 0.85
+    - Vector1_BAAFB28E: 0
+    - Vector1_CB66FE07: 0.47
+    - Vector1_CD253DF5: 0
+    - Vector1_DC6F7B14: 0.8
+    - Vector1_E06D11AC: 0.7
+    - Vector1_EFD84FFD: 0.5
+    m_Colors:
+    - Color_16B48F0B: {r: 0.16470584, g: 0.2235294, b: 0.58431375, a: 1}
+    - Color_1906F46E: {r: 0.99056596, g: 0.99056596, b: 0.99056596, a: 1}
+    - Color_1B072B6: {r: 1, g: 1, b: 1, a: 1}
+    - Color_3E351F1: {r: 0.5647059, g: 0.45098042, b: 0.41568628, a: 1}
+    - Color_4B615CD5: {r: 0.2862745, g: 0.62352943, b: 0.039215688, a: 1}
+    - Color_876EE67F: {r: 0.2588235, g: 0.6666667, b: 0.9921569, a: 1}
+    - Color_A68010A8: {r: 0.28301886, g: 0.27634388, b: 0.27634388, a: 1}
+    - Color_BDC0C032: {r: 0, g: 0, b: 0, a: 0}
+    - Color_C6A1C870: {r: 1, g: 0.8980393, b: 0, a: 1}
+    - Color_F2E4863F: {r: 0.45098042, g: 1, b: 0, a: 1}
+    - Vector2_EFA6378C: {r: 0, g: 0, b: 0, a: 0}

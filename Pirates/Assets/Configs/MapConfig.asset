@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0263d60d61e64c3e84b0290ca68e97a, type: 3}
+  m_Name: MapConfig
+  m_EditorClassIdentifier: 
+  octaves: 6
+  levelOfDetail: 1
+  useFlatShading: 1
+  useColorGradient: 1
+  HeightMultiplayerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.50071096
+      value: 0.0039434284
+      inSlope: 0.020813541
+      outSlope: 0.020813541
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15548651
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+  perlinNoiseScale: 25
+  heightMultiplyer: 2.7
+  perlinNoisePersistance: 0.294
+  perlinNoiseLacunarity: 1.74
+  perlinNoiseOffsett: {x: 555.7, y: 372}
+  randomizeSeed: 0
+  seed: 64357
+  initialFrequenzy: 0.356
+  initialAmplitude: 3.22
+  mapMode: 0

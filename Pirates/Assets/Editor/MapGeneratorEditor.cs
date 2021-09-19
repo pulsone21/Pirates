@@ -12,7 +12,7 @@ public class MapGeneratorEditor : Editor
 
         if (GUILayout.Button("Generate World"))
         {
-            mapGenerator.GenerateWorld();
+            mapGenerator.DrawMapInEditor();
         }
         if (GUILayout.Button("Save Current Mesh as Asset"))
         {

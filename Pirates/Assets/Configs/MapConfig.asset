@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MapConfig
   m_EditorClassIdentifier: 
   octaves: 6
-  levelOfDetail: 1
-  useFlatShading: 1
-  useColorGradient: 1
+  editorPreviewLOD: 1
+  useFlatShading: 0
+  useColorGradient: 0
   HeightMultiplayerCurve:
     serializedVersion: 2
     m_Curve:
@@ -49,10 +49,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 1
     m_RotationOrder: 4
-  perlinNoiseScale: 25
-  heightMultiplyer: 2.7
-  perlinNoisePersistance: 0.294
-  perlinNoiseLacunarity: 1.74
+  perlinNoiseScale: 18.4
+  heightMultiplyer: 16.7
+  perlinNoisePersistance: 0.384
+  perlinNoiseLacunarity: 2.41
   perlinNoiseOffsett: {x: 555.7, y: 372}
   randomizeSeed: 0
   seed: 64357

@@ -14,7 +14,7 @@ public class GenerateTexture : MonoBehaviour
         LoadTerrains();
     }
 
-    public Texture2D GetTexture2D(float[,] noiseMap, DrawMode drawMode, MapConfig mapConfig)
+    public Texture2D GetTexture2D(float[,] noiseMap, DrawMode drawMode)
     {
         switch (drawMode)
         {

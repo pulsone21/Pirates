@@ -4,7 +4,7 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "Configs/MapConfig", fileName = "New MapConfig")]
 public class MapConfig : ScriptableObject
 {
-    public int shunkSize
+    public int chunkSize
     {
         get
         {
@@ -14,13 +14,12 @@ public class MapConfig : ScriptableObject
             }
             else
             {
-                return 239;
+                return 241;
             }
         }
     }
-
     public int octaves;
-    [Range(1, 6)] public int levelOfDetail;
+    [Range(1, 6)] public int editorPreviewLOD;
     public bool useFlatShading, useColorGradient;
     public AnimationCurve HeightMultiplayerCurve;
     [Range(0, 25)] public float perlinNoiseScale;

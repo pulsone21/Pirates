@@ -4,17 +4,17 @@ using UnityEngine;
 
 public static class PerlinNoise
 {
-    public static float[,] GenerateNoiseMap(MapConfig mapConfig)
+    public static float[,] GenerateNoiseMap(MapConfig mapConfig, Vector2 center)
     {
-        int mapWidth = mapConfig.shunkSize;
-        int mapHeight = mapConfig.shunkSize;
+        int mapWidth = mapConfig.chunkSize;
+        int mapHeight = mapConfig.chunkSize;
         float[,] noiseMap = new float[mapWidth, mapHeight];
 
         float scale = mapConfig.perlinNoiseScale;
         int octaves = mapConfig.octaves;
         float persistance = mapConfig.perlinNoisePersistance;
         float lacunarity = mapConfig.perlinNoiseLacunarity;
-        Vector2 offset = mapConfig.perlinNoiseOffsett;
+        Vector2 offset = mapConfig.perlinNoiseOffsett + center;
 
         System.Random rndSys = new System.Random(mapConfig.seed);
         Vector2[] octaveOffsets = new Vector2[octaves];
@@ -88,11 +88,11 @@ public static class PerlinNoise
 
     private static float[,] ApplyFallOfMap(float[,] noiseMap, MapConfig mapConfig)
     {
-        float[,] fallofMap = FalloffMapGenerator.GenerateFalloff(mapConfig.shunkSize);
+        float[,] fallofMap = FalloffMapGenerator.GenerateFalloff(mapConfig.chunkSize);
 
-        for (int x = 0; x < mapConfig.shunkSize; x++)
+        for (int x = 0; x < mapConfig.chunkSize; x++)
         {
-            for (int y = 0; y < mapConfig.shunkSize; y++)
+            for (int y = 0; y < mapConfig.chunkSize; y++)
             {
                 // Debug.Log($"FallOfMap Value: {fallofMap[x, y]}, noiseMap Value: {noiseMap[x, y]}, Result = {Mathf.Clamp01(noiseMap[x, y] - fallofMap[x, y])}");
                 noiseMap[x, y] = Mathf.Clamp01((noiseMap[x, y] - fallofMap[x, y]));

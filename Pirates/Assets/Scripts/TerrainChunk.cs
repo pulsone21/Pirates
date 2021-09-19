@@ -20,7 +20,7 @@ public class TerrainChunk
 
     private int previousLODIndex = -1;
 
-    public TerrainChunk(Vector2 coord, int size, Transform parent, MapGenerator _mapGenerator, Material material, LODInfo[] detailLevels)
+    public TerrainChunk(Vector2 coord, int size, Transform parent, MapGenerator _mapGenerator, Material material, LODInfo[] detailLevels, float scale)
     {
         position = coord * size;
         bounds = new Bounds(position, Vector2.one * size);
@@ -31,9 +31,9 @@ public class TerrainChunk
         meshFilter = meshObject.AddComponent<MeshFilter>();
         meshCollider = meshObject.AddComponent<MeshCollider>();
 
-        meshObject.transform.position = positionV3;
+        meshObject.transform.position = positionV3 * scale;
         meshObject.transform.parent = parent;
-
+        meshObject.transform.localScale = Vector3.one * scale;
         meshRenderer.sharedMaterial = material;
 
         SetVisible(false);
@@ -96,6 +96,7 @@ public class TerrainChunk
                         lodMesh.RequestMesh(mapData);
                     }
                 }
+                EndlessTerrain.terrainChunksVisibleLastUpdate.Add(this);
             }
 
             SetVisible(visible);

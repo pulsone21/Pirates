@@ -30,9 +30,11 @@ public class MapConfig : ScriptableObject
     public bool randomizeSeed;
     public int seed;
     [Range(0, 1)] public float initialFrequenzy;
-    [Range(0, 10)] public float initialAmplitude;
+    [Range(0.6f, 2)] public float initialAmplitude;
     public enum MapMode { EndlessMap, Falloffmap };
     public MapMode mapMode;
+    [Range(1f, 2f)]
+    public float MaxHeight;
 
     void OnEnable()
     {

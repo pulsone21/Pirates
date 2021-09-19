@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 public static class PerlinNoise
 {
-    public static float[,] GenerateNoiseMap(MapConfig mapConfig, Vector2 center)
+    public enum NormalizeMode { Local, Global }
+
+    public static float[,] GenerateNoiseMap(MapConfig mapConfig, Vector2 center, NormalizeMode normalizeMode)
     {
         int mapWidth = mapConfig.chunkSize;
         int mapHeight = mapConfig.chunkSize;
@@ -19,17 +20,24 @@ public static class PerlinNoise
         System.Random rndSys = new System.Random(mapConfig.seed);
         Vector2[] octaveOffsets = new Vector2[octaves];
 
+        float maxPossibleHeight = 0;
+        float amplitude = mapConfig.initialAmplitude;
+
+
         for (int i = 0; i < octaves; i++)
         {
             float offsetX = rndSys.Next(-100000, 100000) + offset.x;
-            float offsetY = rndSys.Next(-100000, 100000) + offset.y;
+            float offsetY = rndSys.Next(-100000, 100000) - offset.y;
             octaveOffsets[i] = new Vector2(offsetX, offsetY);
+
+            maxPossibleHeight += amplitude;
+            amplitude *= persistance;
         }
 
         if (scale <= 0) scale = 0.00001f;
 
-        float maxNoiseHeight = float.MinValue;
-        float minNoiseHeight = float.MaxValue;
+        float maxLocalNoiseHeight = float.MinValue;
+        float minLocalNoiseHeight = float.MaxValue;
 
 
         float halfWidth = mapWidth / 2f;
@@ -41,14 +49,14 @@ public static class PerlinNoise
             for (int x = 0; x < mapWidth; x++)
             {
 
-                float amplitude = mapConfig.initialAmplitude;
+                amplitude = mapConfig.initialAmplitude;
                 float frequency = mapConfig.initialFrequenzy;
                 float noiseHeight = 0;
 
                 for (int i = 0; i < octaves; i++)
                 {
-                    float sampleX = (float)((x - halfWidth) / scale) * frequency + octaveOffsets[i].x;
-                    float sampleY = (float)((y - halfHeight) / scale) * frequency + octaveOffsets[i].y;
+                    float sampleX = (float)(x - halfWidth + octaveOffsets[i].x) / scale * frequency;
+                    float sampleY = (float)(y - halfHeight + octaveOffsets[i].y) / scale * frequency;
 
                     float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
                     noiseHeight += perlinValue * amplitude;
@@ -57,24 +65,35 @@ public static class PerlinNoise
                     frequency *= lacunarity;
                 }
 
-                if (noiseHeight > maxNoiseHeight)
+                if (noiseHeight > maxLocalNoiseHeight)
                 {
-                    maxNoiseHeight = noiseHeight;
+                    maxLocalNoiseHeight = noiseHeight;
                 }
-                else if (noiseHeight < minNoiseHeight)
+                else if (noiseHeight < minLocalNoiseHeight)
                 {
-                    minNoiseHeight = noiseHeight;
+                    minLocalNoiseHeight = noiseHeight;
                 }
                 noiseMap[x, y] = noiseHeight;
             }
         }
 
-        //This makes the noise mapRange from -1 -> 1 to 0 -> 1; 
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]);
+                switch (normalizeMode)
+                {
+                    case NormalizeMode.Local:
+                        //This makes the noise mapRange from -1 -> 1 to 0 -> 1;
+                        noiseMap[x, y] = Mathf.InverseLerp(minLocalNoiseHeight, maxLocalNoiseHeight, noiseMap[x, y]);
+                        break;
+                    case NormalizeMode.Global:
+                        float normalizedHeight = (noiseMap[x, y] + 1) / (2f * maxPossibleHeight / mapConfig.MaxHeight);
+                        noiseMap[x, y] = Mathf.Clamp(normalizedHeight, 0, int.MaxValue);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
             }
         }
 

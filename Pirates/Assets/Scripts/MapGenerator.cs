@@ -15,29 +15,31 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private MeshCollider meshCollider;
     public MapData mapData;
 
+    public PerlinNoise.NormalizeMode normalizeMode;
+
     private Queue<MapThreadInfo<MapData>> MapDataThreadInfoQueue = new Queue<MapThreadInfo<MapData>>();
     private Queue<MapThreadInfo<MeshData>> MeshDataThreadInfoQueue = new Queue<MapThreadInfo<MeshData>>();
 
     private void Awake()
     {
-        this.transform.localScale = new Vector3(mapConfig.chunkSize, mapConfig.chunkSize, mapConfig.chunkSize);
+        // this.transform.localScale = new Vector3(mapConfig.chunkSize, mapConfig.chunkSize, mapConfig.chunkSize);
     }
     void Start()
     {
 
-        GenerateWorldData(Vector2.zero);
+        GenerateWorldData(Vector2.zero, normalizeMode);
     }
 
-    MapData GenerateWorldData(Vector2 center)
+    MapData GenerateWorldData(Vector2 center, PerlinNoise.NormalizeMode normalizeMode)
     {
-        float[,] noiseMap = PerlinNoise.GenerateNoiseMap(mapConfig, center);
+        float[,] noiseMap = PerlinNoise.GenerateNoiseMap(mapConfig, center, normalizeMode);
         mapData = new MapData(noiseMap, generateTexture.GenerateTerrainColorMap(noiseMap));
         return mapData;
     }
 
     public void DrawMapInEditor()
     {
-        GenerateWorldData(Vector2.zero);
+        GenerateWorldData(Vector2.zero, normalizeMode);
         Mesh newMesh = MeshGenerator.CreateMeshData(mapData.heightMap, mapConfig, generateTexture.terrainGradient, mapConfig.editorPreviewLOD).CreateMesh();
         meshFilter.mesh = newMesh;
         meshCollider.sharedMesh = newMesh;
@@ -52,6 +54,8 @@ public class MapGenerator : MonoBehaviour
         {
             meshRenderer.sharedMaterial = vertexShaderMaterial;
         }
+
+        this.transform.localScale = new Vector3(mapConfig.chunkSize, mapConfig.chunkSize, mapConfig.chunkSize);
     }
 
     public void RequestMapData(Vector2 center, Action<MapData> callback)
@@ -65,7 +69,7 @@ public class MapGenerator : MonoBehaviour
 
     private void MapDataThread(Vector2 center, Action<MapData> callback)
     {
-        MapData mapData = GenerateWorldData(center);
+        MapData mapData = GenerateWorldData(center, normalizeMode);
         lock (MapDataThreadInfoQueue)
         {
             MapDataThreadInfoQueue.Enqueue(new MapThreadInfo<MapData>(callback, mapData));

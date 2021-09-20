@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0263d60d61e64c3e84b0290ca68e97a, type: 3}
   m_Name: MapConfig
   m_EditorClassIdentifier: 
-  octaves: 6
+  octaves: 4
   editorPreviewLOD: 1
   useFlatShading: 0
   useColorGradient: 0
@@ -38,13 +38,13 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.15548651
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
+      time: 1.0108731
+      value: 1.0754725
+      inSlope: 0.9633722
+      outSlope: 0.9633722
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.062385764
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 1
@@ -57,5 +57,6 @@ MonoBehaviour:
   randomizeSeed: 0
   seed: 64357
   initialFrequenzy: 0.356
-  initialAmplitude: 3.22
+  initialAmplitude: 0.918
   mapMode: 0
+  MaxHeight: 1.427
